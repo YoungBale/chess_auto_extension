@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chess Auto Tool</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo-icon">♟</div>
+        <div class="brand-text">
+          <h1>Chess Auto Tool</h1>
+          <span class="badge">v1.0 • Stockfish AI</span>
+        </div>
+      </div>
+      <div id="conn-pill" class="conn-pill standby" title="Trạng thái kết nối">
+        <span class="conn-dot"></span>
+        <span id="conn-text">Standby</span>
+      </div>
+    </header>
+
+    <!-- Main Controls -->
+    <section class="action-section">
+      <button id="btn-start" class="btn btn-primary">
+        <span class="btn-icon">▶</span>
+        <span>Bắt đầu tự động đánh</span>
+      </button>
+      <button id="btn-stop" class="btn btn-secondary">
+        <span class="btn-icon">⏹</span>
+        <span>Dừng lại</span>
+      </button>
+    </section>
+    <button id="btn-force" class="btn" style="width: 100%; margin-top: -6px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: 700; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);">
+      <span class="btn-icon">⚡</span>
+      <span>ĐI NGAY NƯỚC NÀY (FORCE MOVE)</span>
+    </button>
+
+    <!-- Status Card -->
+    <section class="status-card">
+      <div class="status-header">
+        <span class="status-title">TRẠNG THÁI HIỆN TẠI</span>
+        <span id="board-badge" class="board-badge not-found">Chưa thấy bàn cờ</span>
+      </div>
+      <div id="status-message" class="status-msg">
+        Mở trang có bàn cờ rồi nhấn "Bắt đầu".
+      </div>
+      <div class="status-details">
+        <div class="detail-item">
+          <span class="detail-label">Lượt đi:</span>
+          <span id="detail-turn" class="detail-val">--</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">FEN:</span>
+          <span id="detail-fen" class="detail-val fen-code">--</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Configuration Settings -->
+    <section class="settings-section">
+      <h2 class="section-title">Cài đặt chiến thuật</h2>
+
+      <!-- Side Selection -->
+      <div class="setting-group">
+        <label class="setting-label">Phe bot điều khiển</label>
+        <div class="seg-control">
+          <button type="button" class="seg-btn active" data-side="auto">Tự động</button>
+          <button type="button" class="seg-btn" data-side="w">Trắng (W)</button>
+          <button type="button" class="seg-btn" data-side="b">Đen (B)</button>
+        </div>
+      </div>
+
+      <!-- Engine Choice -->
+      <div class="setting-group">
+        <label class="setting-label" for="engine-select">Chess Engine</label>
+        <select id="engine-select" class="custom-select">
+          <option value="stockfish_offline" selected>⚡ Stockfish GM Offline (Elo 3200+ Khuyên dùng)</option>
+          <option value="stockfish_online">☁️ Stockfish Online Cloud (Lichess + SF16)</option>
+          <option value="local">🧠 Minimax Pro (Thuần JS - Elo 1800+)</option>
+        </select>
+      </div>
+
+      <!-- Elo Rating Slider -->
+      <div class="setting-group" id="elo-group">
+        <div class="slider-header">
+          <label class="setting-label" for="elo-slider">Sức cờ (Elo Rating)</label>
+          <span id="elo-val" class="slider-badge">3200 (Đại kiện tướng GM)</span>
+        </div>
+        <input type="range" id="elo-slider" min="1200" max="3200" step="100" value="3200" class="custom-slider">
+      </div>
+
+      <!-- Move Delay Slider -->
+      <div class="setting-group">
+        <div class="slider-header">
+          <label class="setting-label" for="delay-slider">Thời gian suy nghĩ mỗi nước</label>
+          <span id="delay-val" class="slider-badge">5.0s (3s - 7s Tự nhiên)</span>
+        </div>
+        <input type="range" id="delay-slider" min="3000" max="7000" step="500" value="5000" class="custom-slider">
+      </div>
+
+      <!-- Calculation Depth -->
+      <div class="setting-group">
+        <div class="slider-header">
+          <label class="setting-label" for="depth-slider">Độ sâu tính toán (Depth)</label>
+          <span id="depth-val" class="slider-badge">16 (Elo 3500+ GM)</span>
+        </div>
+        <input type="range" id="depth-slider" min="14" max="18" step="1" value="16" class="custom-slider">
+      </div>
+
+      <!-- Floating HUD Toggle -->
+      <div class="setting-group-inline">
+        <label for="hud-toggle" class="setting-label">Hiển thị HUD trên bàn cờ</label>
+        <label class="switch">
+          <input type="checkbox" id="hud-toggle" checked>
+          <span class="slider-toggle"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Footer Quick Links -->
+    <footer class="app-footer">
+      <button id="btn-open-test" class="link-btn">
+        <span>♟ Mở bàn cờ thử nghiệm (Test Board)</span>
+      </button>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

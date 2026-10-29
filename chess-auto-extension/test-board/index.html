@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bàn cờ thử nghiệm - Chess Auto Test Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="title-area">
+        <h1>Chess Auto • Test Board</h1>
+        <p>Bàn cờ mô phỏng có sẵn DOM Adapter cho Chrome Extension</p>
+      </div>
+
+      <div class="status-indicator">
+        <div id="turn-badge" class="turn-badge">
+          <span id="turn-dot" class="turn-dot"></span>
+          <span id="turn-text">Lượt đi: Trắng (White)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Left: Chessboard & Controls -->
+      <section class="board-container">
+        <div class="board-card">
+          <!-- Bàn cờ Adapter: Có data-chess-board và data-fen -->
+          <div id="chess-board"
+               class="chess-board"
+               data-chess-board="true"
+               data-fen=""
+               data-turn="w"
+               data-orientation="white">
+            <!-- 64 ô cờ được render tự động bằng app.js -->
+          </div>
+        </div>
+
+        <!-- Controls Toolbar -->
+        <div class="board-toolbar">
+          <button id="btn-reset" class="btn btn-primary">
+            <span>🔄 Ván mới</span>
+          </button>
+          <button id="btn-flip" class="btn">
+            <span>🔃 Đổi góc nhìn</span>
+          </button>
+          <button id="btn-undo" class="btn">
+            <span>↩️ Đi lại (Undo)</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Right: FEN, Move History & Extension Guide -->
+      <aside class="sidebar">
+        <!-- FEN Panel -->
+        <div class="panel">
+          <div class="panel-title">
+            <span>Vị trí FEN hiện tại</span>
+          </div>
+          <div class="fen-input-group">
+            <input type="text" id="fen-input" class="fen-input" readonly>
+            <button id="btn-copy-fen" class="btn" style="flex:0; white-space:nowrap;">Sao chép</button>
+          </div>
+          <div class="fen-input-group" style="margin-top: 4px;">
+            <button id="btn-set-fen" class="btn" style="width: 100%;">Nạp FEN từ ô trên</button>
+          </div>
+        </div>
+
+        <!-- Move History -->
+        <div class="panel">
+          <div class="panel-title">
+            <span>Lịch sử nước đi (PGN)</span>
+          </div>
+          <div id="moves-list" class="moves-list">
+            <!-- Nước đi hiển thị ở đây -->
+          </div>
+        </div>
+
+        <!-- Instructions Card -->
+        <div class="tip-card">
+          <span class="tip-badge">HƯỚNG DẪN KIỂM TRA BOT</span>
+          <p>
+            1. Bật Extension <strong>Chess Auto Tool</strong> từ thanh công cụ Chrome.<br>
+            2. Chọn <strong>Phe bot</strong> (ví dụ: <em>Trắng</em> hoặc <em>Tự động</em>).<br>
+            3. Nhấn <strong>"Bắt đầu tự động đánh"</strong>.<br>
+            4. Quan sát bot tự động tính toán nước đi thông qua Stockfish và click quân cờ mượt mà! Bạn có thể tự mình đánh các nước đối phương (Đen).
+          </p>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="chess-rules.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
